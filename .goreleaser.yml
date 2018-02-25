@@ -18,8 +18,10 @@ changelog:
     exclude:
       - Merge pull request
       - Merge branch
+
 checksum:
   name_template: '{{ .ProjectName }}-{{ .Version }}-checksums.txt'
+
 archive:
   name_template: '{{ .ProjectName }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
   replacements:
