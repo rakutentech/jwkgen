@@ -1,0 +1,28 @@
+# .goreleaser.yml
+# Build customization
+builds:
+  - binary: jwkgen
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - 386
+      - amd64
+      - arm
+      - arm64
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - Merge pull request
+      - Merge branch
+archive:
+  name_template: '{{ .ProjectName }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+  replacements:
+    386: x86
+    amd64: x86_64
+  format_overrides:
+    - goos: windows
+      format: zip
+
