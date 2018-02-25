@@ -3,7 +3,8 @@ go: '1.10'
 install:
   - go get -t -v ./...
 before_script:
-    - go vet ./...
+  - go vet ./...
+  - go build -o /dev/null
 deploy:
 - provider: script
   skip_cleanup: true
