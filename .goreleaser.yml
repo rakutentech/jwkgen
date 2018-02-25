@@ -25,4 +25,31 @@ archive:
   format_overrides:
     - goos: windows
       format: zip
+brew:
+  # Reporitory to push the tap to.
+  github:
+    owner: boazy
+    name: homebrew-rakuten
+
+  # Git author used to commit to the repository.
+  # Defaults are shown.
+  commit_author:
+    name: boazy
+    email: boazyan@gmail.com
+
+  # Folder inside the repository to put the formula.
+  # Default is the root folder.
+  folder: Formula
+
+  # Your app's homepage.
+  # Default is empty.
+  homepage: "https://github.com/rakutentech/jwkgen"
+
+  # Your app's description.
+  # Default is empty.
+  description: |
+    Small command-line tool that generates asymmetric JSON Web Keys for the
+    following algorithms and curves
+
+
 
