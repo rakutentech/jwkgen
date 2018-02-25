@@ -1,15 +1,15 @@
 package main
 
 import (
-	"github.com/rakutentech/jwk-go/jwk"
-	"os"
-	"github.com/rakutentech/jwk-go/okp"
-	"crypto/rsa"
 	"crypto/ecdsa"
 	"crypto/elliptic"
-	"log"
 	"crypto/rand"
+	"crypto/rsa"
 	"github.com/pkg/errors"
+	"github.com/rakutentech/jwk-go/jwk"
+	"github.com/rakutentech/jwk-go/okp"
+	"log"
+	"os"
 )
 
 func generateKeyPair() (interface{}, interface{}, *jwk.KeySpec, *jwk.KeySpec) {

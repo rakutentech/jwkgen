@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"gopkg.in/alecthomas/kingpin.v2"
+	"log"
 )
 
 var (
 	bareOutput  = false
 	allowUnsafe = kingpin.
-		Flag("allow-unsafe", "Allow unsafe parameters").Bool()
+			Flag("allow-unsafe", "Allow unsafe parameters").Bool()
 	color = kingpin.
 		Flag("color", "Use color in JSON output (true by default)").
 		Default("true").Bool()
