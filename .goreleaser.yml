@@ -11,12 +11,14 @@ builds:
       - amd64
       - arm
       - arm64
+    ldflags: '-s -w -X main.version={{.Version}} -X main.buildDate={{.Date}'
 changelog:
   sort: asc
   filters:
     exclude:
       - Merge pull request
       - Merge branch
+checksum: '{{ .ProjectName }}-{{ .Version }}-checksums.txt'
 archive:
   name_template: '{{ .ProjectName }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
   replacements:

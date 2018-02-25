@@ -7,6 +7,9 @@ import (
 )
 
 var (
+	buildDate string
+	version string
+
 	bareOutput  = false
 	allowUnsafe = kingpin.
 			Flag("allow-unsafe", "Allow unsafe parameters").Bool()
@@ -26,7 +29,11 @@ var (
 )
 
 func main() {
-	kingpin.Version("1.3.0")
+	if version == "" {
+		kingpin.Version("JWK Generator (jwkgen) development snapshot")
+	} else {
+		kingpin.Version(fmt.Sprintf("JWK Generator (jwkgen) version %s\nBuild date: %s", version, buildDate))
+	}
 	kingpin.CommandLine.HelpFlag.Short('h')
 	kingpin.Parse()
 
