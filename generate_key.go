@@ -35,7 +35,7 @@ func generateKeyPair() (interface{}, interface{}, *jwk.KeySpec, *jwk.KeySpec) {
 		panic(err)
 	}
 
-	return priv, pub, pubJwk, privJwk
+	return priv, pub, privJwk, pubJwk
 }
 
 func generateKey() (interface{}, error) {
