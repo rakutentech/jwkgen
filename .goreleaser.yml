@@ -33,8 +33,8 @@ archive:
 brew:
   # Reporitory to push the tap to.
   github:
-    owner: boazy
-    name: homebrew-rakuten
+    owner: rakutentech
+    name: homebrew-tap
 
   # Git author used to commit to the repository.
   # Defaults are shown.
