@@ -1,5 +1,7 @@
 # jwkgen - JSON Web Key Generator [![Go Report Card](https://goreportcard.com/badge/github.com/rakutentech/jwkgen)](https://goreportcard.com/report/github.com/rakutentech/jwkgen)
 
+## Overview
+
 jwkgen is a small command-line tool that generates asymmetric JSON Web Keys for the
 following algorithms and curves:
 
@@ -9,6 +11,24 @@ following algorithms and curves:
 * P-256 (ECDSA and ECDH)
 * P-384 (ECDSA and ECDH)
 * P-521 (ECDSA and ECDH)
+
+## Installation
+
+
+On Mac, you can just use Homebrew:
+```sh
+> brew install rakutentech/tap
+> brew install jwkgen
+```
+On other platforms, you can just download the [latest release
+archive](https://github.com/rakutentech/jwkgen/releases/latest) for your
+platform and extract the binary to any location.
+
+If you have Go installed, you can also install the latest version from master
+branch:
+```sh
+> go get -u github.com/rakutentech/jwkgen
+```
 
 ## Usage
 
