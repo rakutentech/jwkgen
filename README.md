@@ -17,7 +17,7 @@ following algorithms and curves:
 
 On Mac, you can just use Homebrew:
 ```sh
-> brew install rakutentech/tap
+> brew tap rakutentech/tap
 > brew install jwkgen
 ```
 On other platforms, you can just download the [latest release
