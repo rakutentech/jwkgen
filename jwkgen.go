@@ -52,6 +52,7 @@ func printSymmetricKey() {
 	if *onlyPEM {
 		return // Write nothing
 	}
+	bareOutput = true
 	key := generateOctKey()
 	err := writeJSONFor(ObjectInfo{".json", "Key (JWK)"}, &key)
 	checkKeyError(err)
