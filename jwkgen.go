@@ -8,23 +8,23 @@ import (
 
 var (
 	buildDate string
-	version string
+	version   string
 
 	bareOutput  = false
 	allowUnsafe = kingpin.
-			Flag("allow-unsafe", "Allow unsafe parameters").Bool()
-	color = kingpin.
+		Flag("allow-unsafe", "Allow unsafe parameters").Bool()
+	useColor = kingpin.
 		Flag("color", "Use color in JSON output (true by default)").
 		Default("true").Bool()
 	curve = kingpin.
 		Flag("curve", "Named elliptic curve to use to generate a key. Valid values are P256, P384, P521, X25519, Ed25519").
-		Short('e').Default("P256").String()
-	rsaBits = kingpin.
+		Short('e').Default("Ed25519").String()
+	bits = kingpin.
 		Flag("bits", "Number of bits to use for RSA keys").
 		Short('b').Default("2048").Int()
 	onlyPEM  = kingpin.Flag("pem", "Print only PEM format").Bool()
 	onlyJWK  = kingpin.Flag("jwk", "Print only JWK format").Bool()
-	keyType  = kingpin.Arg("key type", "Key type: rsa, ec").Default("ec").String()
+	keyType  = kingpin.Arg("key type", "Key type: oct, rsa, ec").Default("ec").Enum("oct", "rsa", "ec")
 	filename = kingpin.Arg("filename", "Output filename (without extension)").String()
 )
 
@@ -37,13 +37,32 @@ func main() {
 	kingpin.CommandLine.HelpFlag.Short('h')
 	kingpin.Parse()
 
-	priv, pub, privJwk, pubJwk := generateKeyPair()
+	if *keyType == "oct" {
+		printSymmetricKey()
+	} else {
+		printKeyPair()
+	}
 
+	if !bareOutput {
+		fmt.Println()
+	}
+}
+
+func printSymmetricKey() {
+	if *onlyPEM {
+		return // Write nothing
+	}
+	key := generateOctKey()
+	err := writeJSONFor(ObjectInfo{".json", "Key (JWK)"}, &key)
+	checkKeyError(err)
+}
+
+func printKeyPair() {
+	priv, pub, privJwk, pubJwk := generateKeyPair()
 	bareOutput = *filename == "" && (*onlyJWK || *onlyPEM)
 	writePublic := !bareOutput
 	writeJWK := !*onlyPEM
 	writePEM := !*onlyJWK
-
 	var err error
 	if writeJWK {
 		err = writeJSONFor(ObjectInfo{".json", "Private Key (JWK)"}, &privJwk)
@@ -60,10 +79,6 @@ func main() {
 	if writePublic {
 		err = writePemFor(ObjectInfo{".pub.pem", "Public Key (PEM)"}, pub)
 		checkKeyError(err)
-	}
-
-	if !bareOutput {
-		fmt.Println()
 	}
 }
 

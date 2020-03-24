@@ -2,14 +2,17 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/nwidger/jsoncolor"
 	"io"
-
-	"github.com/hokaccha/go-prettyjson"
 )
 
+func prettyMarshal(obj interface{}) ([]byte, error) {
+	return jsoncolor.MarshalIndent(obj, "", "  ")
+}
+
 func writeJSON(w io.Writer, obj interface{}) error {
-	if *color && *filename == "" {
-		if data, err := prettyjson.Marshal(obj); err != nil {
+	if *useColor && *filename == "" {
+		if data, err := prettyMarshal(obj); err != nil {
 			return err
 		} else if _, err := w.Write(data); err != nil {
 			return err

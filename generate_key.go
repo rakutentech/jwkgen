@@ -9,29 +9,27 @@ import (
 	"github.com/rakutentech/jwk-go/jwk"
 	"github.com/rakutentech/jwk-go/okp"
 	"log"
-	"os"
 )
+
+var normalizationSettings = jwk.NormalizationSettings{
+	RequireKeyID: true,
+}
 
 func generateKeyPair() (interface{}, interface{}, *jwk.KeySpec, *jwk.KeySpec) {
 	priv, err := generateKey()
 	if err != nil {
 		log.Fatalf("failed to generate private key: %s", err)
-		os.Exit(1)
 	}
 	pub := publicKey(priv)
 	if pub == nil {
 		log.Fatal("failed to deduce public key from private key")
 	}
 	privJwk := jwk.NewSpec(priv)
-	if err := privJwk.Normalize(jwk.NormalizationSettings{
-		RequireKeyID: true,
-	}); err != nil {
+	if err := privJwk.Normalize(normalizationSettings); err != nil {
 		panic(err)
 	}
 	pubJwk := jwk.NewSpec(pub)
-	if err := pubJwk.Normalize(jwk.NormalizationSettings{
-		RequireKeyID: true,
-	}); err != nil {
+	if err := pubJwk.Normalize(normalizationSettings); err != nil {
 		panic(err)
 	}
 
@@ -47,6 +45,26 @@ func generateKey() (interface{}, error) {
 	default:
 		return nil, errors.Errorf("Unknown key type: %s", *keyType)
 	}
+}
+
+func generateOctKey() *jwk.KeySpec {
+	if *bits < 128 && !*allowUnsafe {
+		log.Fatalf("Symmetric key size (%d) is too small. NIST recommends at least 128 bits.", *bits)
+	}
+	if *bits%8 != 0 {
+		log.Fatalf("Symmetric octet key bits must be multiple of 8")
+	}
+	bytes := *bits / 8
+	b := make([]byte, bytes)
+	_, err := rand.Read(b)
+	if err != nil {
+		log.Fatal("failed to generate symmetric key", err)
+	}
+	key := jwk.NewSpec(b)
+	if err := key.Normalize(normalizationSettings); err != nil {
+		panic(err)
+	}
+	return key
 }
 
 func generateECKey() (interface{}, error) {
@@ -67,12 +85,12 @@ func generateECKey() (interface{}, error) {
 }
 
 func generateRSAKey() (interface{}, error) {
-	if *rsaBits < 512 || *rsaBits > 8192 {
-		return nil, errors.Errorf("Invalid RSA key size: %d", *rsaBits)
-	} else if *rsaBits < 2048 && !*allowUnsafe {
-		return nil, errors.Errorf("RSA key size (%d) is too small. NIST recommends at least 2048 bits.", *rsaBits)
+	if *bits < 512 || *bits > 8192 {
+		return nil, errors.Errorf("Invalid RSA key size: %d", *bits)
+	} else if *bits < 2048 && !*allowUnsafe {
+		return nil, errors.Errorf("RSA key size (%d) is too small. NIST recommends at least 2048 bits.", *bits)
 	}
-	return rsa.GenerateKey(rand.Reader, *rsaBits)
+	return rsa.GenerateKey(rand.Reader, *bits)
 }
 
 func publicKey(priv interface{}) interface{} {
