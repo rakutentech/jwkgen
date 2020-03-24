@@ -22,39 +22,38 @@ changelog:
 checksum:
   name_template: '{{ .ProjectName }}-{{ .Version }}-checksums.txt'
 
-archive:
-  name_template: '{{ .ProjectName }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
-  replacements:
-    386: x86
-    amd64: x86_64
-  format_overrides:
-    - goos: windows
-      format: zip
-brew:
+archives:
+  - name_template: '{{ .ProjectName }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    replacements:
+      386: x86
+      amd64: x86_64
+    format_overrides:
+      - goos: windows
+        format: zip
+
+brews:
   # Reporitory to push the tap to.
-  github:
-    owner: rakutentech
-    name: homebrew-tap
+  - github:
+      owner: rakutentech
+      name: homebrew-tap
 
-  # Git author used to commit to the repository.
-  # Defaults are shown.
-  commit_author:
-    name: boazy
-    email: boazyan@gmail.com
+    # Git author used to commit to the repository.
+    # Defaults are shown.
+    commit_author:
+      name: boazy
+      email: boazyan@gmail.com
 
-  # Folder inside the repository to put the formula.
-  # Default is the root folder.
-  folder: Formula
+    # Folder inside the repository to put the formula.
+    # Default is the root folder.
+    folder: Formula
 
-  # Your app's homepage.
-  # Default is empty.
-  homepage: "https://github.com/rakutentech/jwkgen"
+    # Your app's homepage.
+    # Default is empty.
+    homepage: "https://github.com/rakutentech/jwkgen"
 
-  # Your app's description.
-  # Default is empty.
-  description: |
-    Small command-line tool that generates asymmetric JSON Web Keys for the
-    following algorithms and curves
-
-
+    # Your app's description.
+    # Default is empty.
+    description: |
+      Small command-line tool that generates asymmetric JSON Web Keys for the
+      following algorithms and curves
 
