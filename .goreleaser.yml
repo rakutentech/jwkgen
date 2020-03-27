@@ -53,8 +53,8 @@ brews:
     # Your app's description.
     # Default is empty.
     description: |
-      Small command-line tool that generates asymmetric JSON Web Keys for the
-      following algorithms and curves
+      Small command-line tool that generates both symmetric and asymmetric JSON
+      Web Keys for multiple types of algorithms and elliptic curves.
 
 scoop:
   # Repository to push the app manifest to.
@@ -74,8 +74,8 @@ scoop:
   # Your app's description.
   # Default is empty.
   description: |
-    Small command-line tool that generates asymmetric JSON Web Keys for the
-    following algorithms and curves
+    Small command-line tool that generates both symmetric and asymmetric JSON
+    Web Keys for multiple types of algorithms and elliptic curves.
 
   # Your app's license
   # Default is empty.
