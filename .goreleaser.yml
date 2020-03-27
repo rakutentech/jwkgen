@@ -38,7 +38,6 @@ brews:
       name: homebrew-tap
 
     # Git author used to commit to the repository.
-    # Defaults are shown.
     commit_author:
       name: boazy
       email: boazyan@gmail.com
@@ -57,3 +56,27 @@ brews:
       Small command-line tool that generates asymmetric JSON Web Keys for the
       following algorithms and curves
 
+scoop:
+  # Repository to push the app manifest to.
+  bucket:
+    owner: rakutentech
+    name: scoop-bucket
+
+  # Git author used to commit to the repository.
+  commit_author:
+    name: boazy
+    email: boazyan@gmail.com
+
+  # Your app's homepage.
+  # Default is empty.
+  homepage: "https://github.com/rakutentech/jwkgen"
+
+  # Your app's description.
+  # Default is empty.
+  description: |
+    Small command-line tool that generates asymmetric JSON Web Keys for the
+    following algorithms and curves
+
+  # Your app's license
+  # Default is empty.
+  license: MIT

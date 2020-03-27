@@ -15,11 +15,18 @@ following algorithms and curves:
 ## Installation
 
 
-On Mac, you can just use Homebrew:
+On Mac, you can easily install jwkgen using [Homebrew](https://brew.sh/):
 ```sh
 > brew tap rakutentech/tap
 > brew install jwkgen
 ```
+
+On Windows, you can use [scoop](https://scoop.sh/)
+```sh
+> scoop bucket add rakutentech https://github.com/rakutentech/scoop-bucket.git
+scoop install jwkgen
+```
+
 On other platforms, you can just download the [latest release
 archive](https://github.com/rakutentech/jwkgen/releases/latest) for your
 platform and extract the binary to any location.
@@ -34,6 +41,12 @@ branch:
 
 **jwkgen [options] <key type> [filename]**
 
+### Positional arguments
+* *key type*: (optional) Key type to generate: oct, rsa, ec (default=ec)
+* *filename*: Output filename (without extension)
+
+### Options
+
 **-h, --help**
 
 Show context-sensitive help (also try --help-long and --help-man).
@@ -46,13 +59,13 @@ Allow unsafe parameters
 
 Use color in JSON output (true by default)
 
-**-e, --curve="P256"**
+**-e, --curve="Ed25519"**
 
 Named elliptic curve to use to generate a key. Valid values are P256, P384, P521, X25519, Ed25519
 
 **-b, --bits=2048**
 
-Number of bits to use when generating RSA keys
+Number of bits to use when generating RSA or octet keys
 
 **--pem**
 

@@ -12,15 +12,15 @@ var (
 
 	bareOutput  = false
 	allowUnsafe = kingpin.
-		Flag("allow-unsafe", "Allow unsafe parameters").Bool()
+			Flag("allow-unsafe", "Allow unsafe parameters").Bool()
 	useColor = kingpin.
-		Flag("color", "Use color in JSON output (true by default)").
-		Default("true").Bool()
+			Flag("color", "Use color in JSON output (true by default)").
+			Default("true").Bool()
 	curve = kingpin.
 		Flag("curve", "Named elliptic curve to use to generate a key. Valid values are P256, P384, P521, X25519, Ed25519").
 		Short('e').Default("Ed25519").String()
 	bits = kingpin.
-		Flag("bits", "Number of bits to use for RSA keys").
+		Flag("bits", "Number of bits to use for RSA or octet keys").
 		Short('b').Default("2048").Int()
 	onlyPEM  = kingpin.Flag("pem", "Print only PEM format").Bool()
 	onlyJWK  = kingpin.Flag("jwk", "Print only JWK format").Bool()
