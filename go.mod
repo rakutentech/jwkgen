@@ -8,7 +8,7 @@ require (
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/nwidger/jsoncolor v0.3.0
 	github.com/pkg/errors v0.9.1
-	github.com/rakutentech/jwk-go v0.0.0-20200324145714-9d3691eb3fd4
+	github.com/rakutentech/jwk-go v1.0.1
 	golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 )
