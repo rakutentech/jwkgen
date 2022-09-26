@@ -17,7 +17,18 @@ func pemBlockFor(obj interface{}) (*pem.Block, error) {
 	var der []byte
 	switch o := obj.(type) {
 	case *rsa.PrivateKey:
-		return &pem.Block{Type: "RSA PRIVATE KEY", Bytes: x509.MarshalPKCS1PrivateKey(o)}, nil
+		switch *rsaKeyFormat {
+		case "PKCS1":
+			return &pem.Block{Type: "RSA PRIVATE KEY", Bytes: x509.MarshalPKCS1PrivateKey(o)}, nil
+		case "PKCS8":
+			der, err := x509.MarshalPKCS8PrivateKey(o)
+			if err != nil {
+				return nil, errors.Wrap(err, "Unable to marshal RSA private key")
+			}
+			return &pem.Block{Type: "PRIVATE KEY", Bytes: der}, nil
+		default:
+			return nil, errors.Errorf("Unknown key format: %v", reflect.TypeOf(obj))
+		}
 	case *ecdsa.PrivateKey:
 		der, err = x509.MarshalECPrivateKey(o)
 		if err != nil {
