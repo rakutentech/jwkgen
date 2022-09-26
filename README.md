@@ -67,6 +67,10 @@ Named elliptic curve to use to generate a key. Valid values are P256, P384, P521
 
 Number of bits to use when generating RSA or octet keys
 
+**--rsa-format="PKCS8"**
+
+RSA private key format. Valid values are PKCS1 (PKCS #1) or PKCS8 (PKCS #8)
+
 **--pem**
 
 Output only PEM format (useful for pipelining results and shell scripting)
