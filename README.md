@@ -34,7 +34,7 @@ platform and extract the binary to any location.
 If you have Go installed, you can also install the latest version from master
 branch:
 ```sh
-> go get -u github.com/rakutentech/jwkgen
+> go install github.com/rakutentech/jwkgen@latest
 ```
 
 ## Usage
