@@ -22,6 +22,9 @@ var (
 	bits = kingpin.
 		Flag("bits", "Number of bits to use for RSA or octet keys").
 		Short('b').Default("2048").Int()
+	rsaKeyFormat = kingpin.
+		Flag("rsa-format", "RSA private key format. Valid values are PKCS1 (PKCS #1) or PKCS8 (PKCS #8)").
+		Default("PKCS8").String()
 	onlyPEM  = kingpin.Flag("pem", "Print only PEM format").Bool()
 	onlyJWK  = kingpin.Flag("jwk", "Print only JWK format").Bool()
 	keyType  = kingpin.Arg("key type", "Key type: oct, rsa, ec").Default("ec").Enum("oct", "rsa", "ec")
