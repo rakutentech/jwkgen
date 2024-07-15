@@ -58,7 +58,9 @@ archives:
         format: zip
 
 brews:
-  - name: homebrew-tap
+  - # Name of the formula
+    name: jwkgen
+
     # Reporitory to push the tap to.
     repository:
       owner: rakutentech
